@@ -6,9 +6,17 @@ import(
 
 func StartManageSystem(){
 	r := gin.Default()
+	r.Static("/assets", "assets")
+	r.LoadHTMLGlob("manageSystem/views/**/*")
 	{
-		c := controllers.NewUserLogin()
-		r.GET("./login", c.Login)
+		g := r.Group("/user")
+		{
+			c := controllers.NewUser()
+			g.GET("/login", c.Login)
+			g.GET("/register", c.Register)
+			g.GET("/registerJson", c.RegisterJson)
+		}
 	}
+	
 	r.Run(":8082")
 }
