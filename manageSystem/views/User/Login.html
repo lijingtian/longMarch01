@@ -1,26 +1,22 @@
-{{define "User/Register.html"}}
+{{define "User/Login.html"}}
 <html>
 <head>
-<title>用户注册</title>
+<title>用户登录</title>
 <script src='/assets/js/jquery/1.12.4/jquery.min.js'></script>
 <script>
-function register(){
+function login(){
 	var name = $("#name").val()
 	var password = $("#password").val()
-	var status = $("#status").val()
-	var role = $("#role").val()
 	$.ajax({
 		type: 'get',
-		url: "/user/registerJson",
+		url: "/user/loginJson",
 		data: {
 			name: name,
-			password: password,
-			status: status,
-			role: role,
+			password: password
 		},
 		success: function(data){
 			if (data == "success"){
-				alert("用户创建成功")
+				alert("登录成功")
 			} else {
 				alert(data)
 			}
@@ -32,9 +28,7 @@ function register(){
 <body>
 <p>用户名：<input type='text' id='name' name='name'> </p>
 <p>密码：<input type='text' id='password' name='password'> </p>
-<p>状态：<input type='text' id='status' name='status'> </p>
-<p>角色：<input type='text' id='role' name='role'> </p>
-<input type='button' onclick='register()'  value="提交">
+<input type='button' onclick='login()'  value="提交">
 </body>
 </html>
 {{end}}

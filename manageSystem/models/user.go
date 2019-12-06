@@ -19,7 +19,14 @@ func NewUser() *User{
 }
 
 func (u *User) GetUserInfo(){
-	sql := "SELECT id,name,password,status,role FROM user"
+	var whereSql string = " WHERE 1=1 "
+	if u.Name != "" {
+		whereSql += fmt.Sprintf(" AND name='%s'", u.Name)
+	}
+	if u.Password != "" {
+		whereSql += fmt.Sprintf(" AND password='%s'", u.Password)
+	}
+	sql := fmt.Sprintf("SELECT id,name,password,status,role FROM user %s", whereSql)
 	rows, err := common.GetDbConn().Query(sql)
 	if err != nil{
 		fmt.Println(err)
@@ -33,7 +40,6 @@ func (u *User) GetUserInfo(){
 			return
 		}
 	}
-	fmt.Println(u)
 }
 
 func (u *User) InsertInto() string{

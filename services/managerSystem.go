@@ -13,6 +13,7 @@ func StartManageSystem(){
 		{
 			c := controllers.NewUser()
 			g.GET("/login", c.Login)
+			g.GET("/loginJson", c.LoginJson)
 			g.GET("/register", c.Register)
 			g.GET("/registerJson", c.RegisterJson)
 		}
