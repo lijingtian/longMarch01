@@ -1,8 +1,9 @@
 package controllers
 
 import(
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 	"longMarch01/manageSystem/models"
+
 )
 
 type User struct{}
@@ -24,6 +25,7 @@ func (u *User) LoginJson(c *gin.Context) {
 	m.Password = password
 	m.GetUserInfo()
 	if m.Id > 0{
+		m.SaveSession(c)
 		msg = "success"
 	} else {
 		msg = "账号或者密码错误"

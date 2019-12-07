@@ -1,8 +1,11 @@
 package models
 
 import(
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/gin"
 	"longMarch01/manageSystem/common"
 	"fmt"
+	"encoding/json"
 )
 
 
@@ -55,4 +58,17 @@ func (u *User) InsertInto() string{
 	} else {
 		return "success"
 	}
+}
+
+func (u *User) SaveSession(c *gin.Context){
+	session := sessions.Default(c)
+	if session.Get(u.Name) == nil {
+		tmp, err := json.Marshal(u)
+		if err != nil{
+			fmt.Println(err.Error())
+		}
+		session.Set("userInfo", string(tmp))
+		session.Save()
+	}
+	fmt.Println("session.Get: ", session.Get("userInfo"))
 }
