@@ -12,9 +12,21 @@
 <td>商品名称</td>
 <td>商品价格</td>
 <td>商品库存</td>
+<td>商品状态</td>
 <td>操作</td>
 </tr>
 </thead>
+<tbody>
+{{range $v := .datas}}
+<tr>
+<td>{{$v.Id}}</td>
+<td>{{$v.Name}}</td>
+<td>{{$v.Price}}</td>
+<td>{{$v.Stock}}</td>
+<td>{{$v.Status}}</td>
+</tr>
+{{end}}
+<tbody>
 </table>
 </body>
 </html>

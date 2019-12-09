@@ -28,10 +28,14 @@ func StartManageSystem(){
 			g.GET("/register", c.Register)
 			g.GET("/registerJson", c.RegisterJson)
 		}
-		g := r.Goup("/goods")
+	}
+	{
+		g := r.Group("/goods")
 		{
 			c := controllers.NewGoods()
-			g.GET("/goodsList", c.GoodsList)
+			g.GET("/list", c.List)
+			g.GET("/add", c.Add)
+			g.GET("/addJson", c.AddJson)
 		}
 	}
 	
