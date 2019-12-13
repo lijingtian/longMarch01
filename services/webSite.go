@@ -1,15 +1,21 @@
 package services
 
 import(
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 	"longMarch01/webSite/controllers"
 )
 
 func StartWebSite(){
 	r := gin.Default()
+	r.Static("/assets", "assets")
+	r.LoadHTMLGlob("website/views/**/*")
+	
 	{
-		c := controllers.NewUserLogin()
-		r.GET("./login", c.Login)
+		g := r.Group("/user")
+		c := controllers.NewUser()
+		g.GET("./login", c.Login)
+		g.GET("./register", c.Register)
+		g.GET("./registerJson", c.RegisterJson)
 	}
 	r.Run(":8081")
 }
