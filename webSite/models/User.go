@@ -33,3 +33,18 @@ func (u *User) Add() string{
 		return "success"
 	}
 }
+
+func (u *User) CheckLogin() {
+	where := " WHERE 1=1"
+	if u.Name != "" && u.Password != "" {
+		where += fmt.Sprintf(" AND name='%s' AND password='%s'", u.Name, u.Password)
+	} else {
+		return 
+	}
+	sql := fmt.Sprintf("SELECT id,name,password,status,role FROM user %s", where)
+	err := common.GetMysqlConn().QueryRow(sql).Scan(&u.Id, &u.Name, &u.Password, &u.Status, &u.Role)
+	if err != nil{
+		fmt.Println(err)
+		return
+	}
+}

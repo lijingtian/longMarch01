@@ -12,7 +12,21 @@ func NewUser() *User{
 }
 
 func (u *User) Login(c *gin.Context){
-	c.JSON(200, gin.H{"message": "this is web site login"})
+	c.HTML(200, "User/Login.html", gin.H{})
+}
+
+func (u *User) LoginJson(c *gin.Context) {
+	m := models.NewUser()
+	m.Name = c.DefaultQuery("name", "")
+	m.Password = c.DefaultQuery("password", "")
+	m.CheckLogin()
+	var msg string
+	if m.Id > 0{
+		msg = "success"
+	} else {
+		msg = "账号或密码错误"
+	}
+	c.JSON(200, msg)
 }
 
 func (u *User) Register(c *gin.Context) {

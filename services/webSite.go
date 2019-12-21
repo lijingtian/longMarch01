@@ -13,9 +13,16 @@ func StartWebSite(){
 	{
 		g := r.Group("/user")
 		c := controllers.NewUser()
-		g.GET("./login", c.Login)
-		g.GET("./register", c.Register)
-		g.GET("./registerJson", c.RegisterJson)
+		g.GET("/login", c.Login)
+		g.GET("/loginJson", c.LoginJson)
+		g.GET("/register", c.Register)
+		g.GET("/registerJson", c.RegisterJson)
+	}
+	
+	{
+		g := r.Group("/goods")
+		c := controllers.NewGoods()
+		g.GET("/list", c.List)
 	}
 	r.Run(":8081")
 }
