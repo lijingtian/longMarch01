@@ -23,6 +23,7 @@ func StartWebSite(){
 		g := r.Group("/goods")
 		c := controllers.NewGoods()
 		g.GET("/list", c.List)
+		g.GET("/buy", c.Buy)
 	}
 	r.Run(":8081")
 }

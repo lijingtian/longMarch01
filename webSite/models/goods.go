@@ -43,3 +43,16 @@ func (g *Goods) List() []Goods {
 	}
 	return datas
 }
+
+func (s *Goods) Buy(num int64) (msg string){
+	sql := fmt.Sprintf("UPDATE %s SET stock=stock-%d WHERE id=%d", tableName, num, s.Id)
+	fmt.Println(sql)
+	_, err := common.GetDbConn().Exec(sql)
+	if err != nil{
+		fmt.Println(err)
+		msg = err.Error()
+	} else {
+		msg = "success"
+	}
+	return
+}

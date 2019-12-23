@@ -3,6 +3,27 @@
 <head>
 <title>商品列表</title>
 <script src='/assets/js/jquery/1.12.4/jquery.min.js'></script>
+ <script>
+ function buy(goodId){
+	var data = {
+		"num": 1,
+		"goodId": goodId,
+	}
+	$.ajax({
+		type: "get",
+		url: "/goods/buy",
+		data: data,
+		success: function(msg){
+			if (msg === "success") {
+				alert("购买成功")
+				location.reload()
+			} else{
+				alert("购买失败,原因:", msg)
+			}
+		}
+	})
+ }
+ </script>
 </head>
 <body>
 <table>
@@ -24,6 +45,7 @@
 <td>{{$v.Price}}</td>
 <td>{{$v.Stock}}</td>
 <td>{{$v.Status}}</td>
+<td><button type="button" onclick="buy({{$v.Id}})">购买</button></td>
 </tr>
 {{end}}
 <tbody>
