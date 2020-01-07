@@ -3,6 +3,7 @@ package controllers
 import(
 	"github.com/gin-gonic/gin"
 	"longMarch01/webSite/models"
+	
 )
 
 type User struct{}
@@ -23,6 +24,7 @@ func (u *User) LoginJson(c *gin.Context) {
 	var msg string
 	if m.Id > 0{
 		msg = "success"
+		m.SaveSession(c)
 	} else {
 		msg = "账号或密码错误"
 	}

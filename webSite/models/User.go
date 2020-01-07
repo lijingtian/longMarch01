@@ -2,6 +2,9 @@ package models
 
 import(
 	"longMarch01/webSite/common"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/gin"
+	"encoding/json"
 	"fmt"
 )
 
@@ -47,4 +50,12 @@ func (u *User) CheckLogin() {
 		fmt.Println(err)
 		return
 	}
+}
+
+func (s *User) SaveSession(c *gin.Context) {
+	session := sessions.Default(c)
+	t, _  := json.Marshal(s)
+	session.Set("userInfo", string(t))
+	session.Save()
+	fmt.Println("user save session: ", session.Get("userInfo"))
 }
