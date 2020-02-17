@@ -1,14 +1,15 @@
 package controllers
 
-import(
-	"github.com/gin-gonic/gin"
+import (
 	"longMarch01/webSite/models"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Goods struct{}
 
-func NewGoods() *Goods{
+func NewGoods() *Goods {
 	return new(Goods)
 }
 
@@ -24,6 +25,6 @@ func (g *Goods) Buy(c *gin.Context) {
 	tmpId := c.DefaultQuery("goodId", "0")
 	t, _ := strconv.ParseInt(tmpId, 10, 64)
 	m.Id = int32(t)
-	msg := m.Buy(numInt)
+	msg := m.PushBuyQueue(numInt)
 	c.JSON(200, msg)
 }

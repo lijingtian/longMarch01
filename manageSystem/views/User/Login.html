@@ -17,6 +17,7 @@ function login(){
 		success: function(data){
 			if (data == "success"){
 				alert("登录成功")
+        window.location.href="/goods/list"
 			} else {
 				alert(data)
 			}
@@ -29,6 +30,8 @@ function login(){
 <p>用户名：<input type='text' id='name' name='name'> </p>
 <p>密码：<input type='text' id='password' name='password'> </p>
 <input type='button' onclick='login()'  value="提交">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/user/register">注册</a>
 </body>
 </html>
 {{end}}

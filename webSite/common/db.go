@@ -1,20 +1,21 @@
 package common
 
-import(
+import (
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
 	"fmt"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var mysqlConn *sql.DB
 
-var dsn string = "root:123456@tcp(localhost:3306)/longmarch01_website"
+var dsn string = "root:@tcp(localhost:3306)/longmarch01_website"
 
-func init(){
-	if mysqlConn == nil{
-		var err error 
+func init() {
+	if mysqlConn == nil {
+		var err error
 		mysqlConn, err = sql.Open("mysql", dsn)
-		if err != nil{
+		if err != nil {
 			fmt.Println(err)
 			return
 		}
@@ -23,6 +24,6 @@ func init(){
 	}
 }
 
-func GetMysqlConn() *sql.DB{
+func GetMysqlConn() *sql.DB {
 	return mysqlConn
 }

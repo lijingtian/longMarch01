@@ -1,19 +1,19 @@
 package main
 
-import(
+import (
 	"fmt"
 	"os"
+
 	"github.com/urfave/cli"
-	
+
 	"longMarch01/services"
-	
 )
 
-func main(){
+func main() {
 	app := cli.NewApp()
-	app.Commands = []cli.Command{
+	app.Commands = []*cli.Command{
 		{
-			Name: "test",
+			Name:  "test",
 			Usage: "this is a test",
 			Action: func(c *cli.Context) error {
 				fmt.Println("this is urfave cli test")
@@ -21,7 +21,7 @@ func main(){
 			},
 		},
 		{
-			Name: "webSite",
+			Name:  "webSite",
 			Usage: "this is web site",
 			Action: func(c *cli.Context) error {
 				fmt.Println("web site start")
@@ -30,16 +30,16 @@ func main(){
 			},
 		},
 		{
-			Name: "manageSystem",
+			Name:  "manageSystem",
 			Usage: "this is manage system",
-			Action: func(c *cli.Context) error{
+			Action: func(c *cli.Context) error {
 				fmt.Println("manage system start")
 				services.StartManageSystem()
 				return nil
 			},
 		},
 	}
-	
+
 	app.Run(os.Args)
 }
 
